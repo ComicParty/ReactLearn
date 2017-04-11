@@ -1,0 +1,62 @@
+<!--  此页内容是根据这个网址的 
+http://zcfy.baomitu.com/article/styling-in-react-1527.html 「用 React 的方式格式化内容」
+部分进行操作的-->
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="utf-8">
+    <title>Styling in React</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <style>
+      #container {
+        padding: 50px;
+        background-color: #FFF;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script type="text/babel">
+      var Letter = React.createClass({
+          render:function(){
+            var letterStyle = {
+              padding:10,
+              margin:10,
+              backgroundColor:"#ffde00",
+              color:"#333",
+              display:"inline-block",
+              fontFamily:"monospace",
+              fontSize:"32",
+              textAlign:"center",
+            };
+            return(
+              <div style={letterStyle}>
+              {this.props.children}
+              </div>
+              );
+          }
+        });
+
+var destination = document.getElementById('container');
+ReactDOM.render(
+  <div>
+  <Letter>A</Letter>
+  <Letter>E</Letter>
+  <Letter>I</Letter>
+  <Letter>O</Letter>
+  <Letter>U</Letter>
+  </div>,
+  destination
+);
+    </script>
+  </body>
+</html>
+<!-- 在组件中指定样式的方式是，通过定义  一个对象，该对象的内容是 CSS 属性及其值。
+有了这个 对象 后，我们就可以用 style 属性，把该对象赋值给想要样式化的 JSX 元素。
+一旦我们自己执行这两个步骤，这就会变得更有意义，所以我们用这个方法来格式化 Letter 组件的输出。 -->
+<!-- 这样我们就有了一个 letterStyle 对象，它里面的属性只是 CSS 属性名以及属性值。如果你以前从来没有在 JavaScript 中定义 CSS 属性（例如，通过设置 object.style），那么转换 CSS 属性为对 JavaScript 友好的东西的公式相当简单：
+
+单个单词的 CSS 属性（比如 padding, margin, color）保持不变。
+带有短横线的多个单词的 CSS 属性（比如 background-color, font-family, border-radius）变成去掉横线，并且第二个单词的首字母大写的驼峰规则命名的单词。 例如，background-color 变成 backgroundColor, font-family 变成 fontFamily, border-radius 变成 borderRadius。 -->
