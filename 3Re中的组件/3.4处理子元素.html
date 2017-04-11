@@ -1,0 +1,45 @@
+<!--  此页内容是根据这个网址的 
+http://zcfy.baomitu.com/article/components-in-react-1524.html 「处理子元素」
+部分进行操作的-->
+<!-- 感觉直接在调用的时候传入属性（参数）然后就管了。也没有什么困难的，先学吧。 -->
+<!DOCTYPE html>
+<html>
+ 
+<head>
+<meta charset="UTF-8">
+  <title>React Components</title>
+  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+ 
+<body>
+  <div id="container"></div>
+  <script type="text/babel">
+
+    var Buttonify = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <button type={this.props.behavior}>{this.props.children}</button>
+      </div>
+    );
+  }
+});
+
+    ReactDOM.render(
+  <div>
+    <Buttonify behavior="Submit">SEND DATA</Buttonify>
+  </div>,
+  document.querySelector("#container")
+);
+  </script>
+  <!-- 
+  访问组件的子元素有更多东西。
+  例如，如果子元素是一个深层嵌套结构的根，那么  this.props.children 属性返回的是一个数组。
+  如果子元素只是一个元素（像本例），那么  this.props.children 属性返回的是没有包在一个数组中的单个组件。
+  还有更多东西要提出来，但是与其先列出各种情况来烦你，还不如自然在后面我们精心安排的示例中自然而然地涉及。
+   -->
+</body>
+ 
+</html>

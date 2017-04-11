@@ -1,26 +1,47 @@
 <!--  此页内容是根据这个网址的 
 http://zcfy.baomitu.com/article/components-in-react-1524.html 「迎接 React 组件」
 部分进行操作的-->
+<!-- 下面JSX部分绿了，原因不明，具体代码看3.2.1.html -->
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>React Components</title>
-  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
-  <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <meta charset="utf-8">
+    <title>React Components</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 </head>
 
 <body>
-  <div id="container"></div>
-  <script type="text/babel">
+    <div id="container"></div>
+    <!-- <script type="text/babel">
     ReactDOM.render(
       <div>
         <p>Hello,world!</p>
       </div>,
       document.getElementById('container')
     );
-  </script>
+  </script> -->
+    <!-- 上面是 ReactDOM 的 render 方法 下面要创建一个组件 -->
+    <script>
+    var HelloWorld = React.createClass({
+  render: function() {
+    return (
+      <p>Hello, world!</p>
+    );
+  }
+});
+
+    ReactDOM.render(
+  <HelloWorld/>,
+  document.querySelector("#container")
+);
+    </script>
+    <!-- 这里我们创建了一个叫做 HelloWorld 的新组件。
+  HelloWorld 要做的事。
+  你定义的有些属性是特殊的， 被 React 用来帮助组件发挥其魔力。
+  其中一个强制性的属性是 render -->
 </body>
 
 </html>

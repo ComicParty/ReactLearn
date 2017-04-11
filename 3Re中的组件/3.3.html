@@ -1,0 +1,48 @@
+<!--  此页内容是根据这个网址的 
+http://zcfy.baomitu.com/article/components-in-react-1524.html 「创建一个 “Hello, World!” 组件」
+下半部分   进行操作的-->
+<!DOCTYPE html>
+<html>
+ 
+<head>
+<meta charset="utf-8">
+  <title>React Components</title>
+  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+ 
+<body>
+  <div id="container"></div>
+  <script type="text/babel">
+ var HelloWorld = React.createClass({
+  render: function() {
+    return (
+      <p>Hello, {this.props.greetTarget}!</p>
+    );
+  }
+});
+
+ 
+ReactDOM.render(
+  <div>
+    <HelloWorld greetTarget="Batman"/>
+    <HelloWorld greetTarget="Iron Man"/>
+    <HelloWorld greetTarget="Nicolas Cage"/>
+    <HelloWorld greetTarget="Mega Man"/>
+    <HelloWorld greetTarget="Bono"/>
+    <HelloWorld greetTarget="Catwoman"/>
+  </div>,
+  document.querySelector("#container")
+);      
+  </script>
+</body>
+ 
+</html>
+<!-- 
+像函数一样，你可以传进参数来更改组件要做的事情。
+当然，在术语上，还是有点点不同。在函数的世界中我们称为  参数，在组件世界里我们称为  属性。
+var..... 组件定义
+ReactDO....  组件调用
+
+ -->
