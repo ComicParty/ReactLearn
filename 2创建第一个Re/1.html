@@ -1,0 +1,40 @@
+ <!-- 此页内容是根据这个网址的
+  http://zcfy.baomitu.com/article/building-your-first-react-app-1521.html 「上手 React」「显示你的姓名」
+  部分进行操作的-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React</title>
+  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+  <!-- 引入 核心 React 库， -->
+<script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+<!-- 引入 React DOM 库 -->
+<!-- 如果没有这两个库，我们是没法创建 React 应用的。 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<!-- 我们还需要在两个 script 标记下添加对 Babel JavaScript 编译器的 -->
+</head>
+<body>
+  <script type="text/babel">
+  <!-- 我们需要给这个 script 块标注一下，这样 babel 才能可以发挥其魔力。实现方法是将 script 标记的 type 属性设置为 text/babel -->
+
+    ReactDOM.render(
+      <h1>Sherlock Holmes</h1>,
+      document.body
+    );
+  </script>
+</body>
+</html>
+<!--  因为不知道在JSX中如何注释所以写在外面
+render 方法带有两个参数：
+你想输出的像 HTML 一样的元素，即 JSX
+React 将要在 DOM 中渲染 JSX 的位置 
+-->
+<!-- 
+第一个参数是封装有文本 “ Sherlock Holmes” 的 h1 标记
+。这个在 JavaScript 内，类 HTML 的语法就是 JSX。在我们在后面将会花大量时间深入研究 JSX 之时，我应该先提到：它看起来一样疯狂。每当在 JavaScript 中看到括号和斜线，我就心死了，因为我得      处理字符串转义和引号这些破玩意。      而用 JSX，这些都不需要我做了。（意思就是：在书写HTML语法中的 引号 等，用JSX不需要转义，而JS需要转义）
+
+第二个参数是 document.body。这个参数没啥特别的，它只是指定 JSX 应该挂在 DOM 中的哪个位置。在我们的示例中，当 render 方法运行时， h1 标记以及它内部的所有东西都放在文档 body 元素内。
+
+ -->
+<!-- Sherlock Holmes, n. 福尔摩斯(名侦探)

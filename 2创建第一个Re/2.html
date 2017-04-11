@@ -1,0 +1,53 @@
+<!-- 此页内容是根据这个网址的
+  http://zcfy.baomitu.com/article/building-your-first-react-app-1521.html 「所有这一切依然是熟悉的」「总结」
+  部分进行操作的-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>React! React! React!</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <style>
+    #container {
+        padding: 50px;
+        background-color: #EEE;
+    }
+    
+    #container h1 {
+        font-size: 48px;
+        font-family: sans-serif;
+        color: #0080a8;
+    }
+    /*CSS 起作用的原因是，在运行所有 React 代码后， DOM 的 body 包含了 container 元素，该元素内有一个 h1 标记。
+    h1 标记是完全用 JSX 语法在 JavaScript 内定义，还是用 CSS 定义在 render 方法外，完全无所谓。*/
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <!-- 用 JavaScript 将输出直接放在 body 元素上有时候会出错，特别是如果你将 React 与其它 JS 库和框架混合在一起用时。推荐的路径是专门创建一个元素作为新的根元素，让这个新元素作为 render 方法要用的目标。OK，我们回到 HTML，添加一个 id 值为 container 的 div 元素。 -->
+    <script type="text/babel">
+        ReactDOM.render(
+        <h1>Batman</h1>,document.querySelector("#container") );
+    </script>
+</body>
+
+</html>
+<!-- 
+上文JSX有两种写法
+var destination = document.querySelector("#container");
+
+ReactDOM.render(
+  Batman,
+  destination
+);
+注意 destination 变量存储了对 container DOM 元素的引用。
+在 render 方法内，我们只是引用了相同的 destination 变量，而不是用一个完整的元素查找语法作为参数。
+我这样做的原因很简单：我想展示的是你依然在写 JavaScript，而 render 只是另一个烦人的带有两个参数的旧方法。
+ -->
+<!-- 总结
+如果这是你第一次创建 React 应用，那么这里已经涵盖了很多基础知识。最大的亮点之一是 React 与其它库是不同的，因为它使用全新的 JSX 语言定义 UI。JSX 的影响不仅仅是定义 UI 元素，它还完全改变了创建应用程序的方式。因为浏览器不能理解 JSX，你需要使用一个中间步骤将 JSX 转换为 JavaScript。一种方式是创建应用来生成与 JSX 源代码相关的转译了的 JavaScript 输出。另一种方式（即我们在这里用的）是在浏览器本身上用 Babel 库来将 JSX 翻译为 JavaScript。虽然在生产环境中因为性能的原因我们不推荐这样做，但是在刚开始学习 React 时候，这样做很方便。
+
+在后续教程中，我们会花一些时间深入了解 JSX，并且超越 render 方法，了解 让 React 运行的所有重要的事情。 -->
