@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+  <title>React! React! React!</title>
+  <script src="https://fb.me/react-0.14.7.js"></script>
+  <script src="https://fb.me/react-dom-0.14.7.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+ 
+<body>
+  <div id="container"></div>
+  <script type="text/babel">
+    var LightningCounter = React.createClass({
+        getInitialState:function(){
+          return{
+            strikes:0
+          };
+        },
+        timerTick:function(){
+          this.setState({
+            strikes:this.state.strikes+100
+          });
+        },
+        componentDidMount:function(){
+          setInterval(this.timeTick,1000);
+        },
+      render: function() {       
+        return(
+          <h1>{this.state.strikes}</h1>
+        );
+      }
+    });
+ 
+    var LightningCounterDisplay = React.createClass({
+        render: function() {
+          
+          var divStyle = {
+            width: 250,
+            textAlign: "center",
+            backgroundColor: "black",
+            padding: 40,
+            fontFamily: "sans-serif",
+            color: "#999",
+            borderRadius: 10
+          };
+ 
+          return(
+            <div style={divStyle}>
+              <LightningCounter/>
+            </div>
+          );
+        }
+    });
+ 
+    ReactDOM.render(
+      <LightningCounterDisplay/>,
+      document.querySelector("#container")
+    );
+/*
+  1.setInterval 函数每 1000 微秒（即 1秒）调用一段代码。
+
+  React 组件暴露的三个 API：
+  2.setState 该方法允许你修改 state 对象的值。
+  3.getInitialState 该方法在组件  挂载   之前运行，并允许你修改组件的 state 对象。
+    注意这里的return 用——{
+  4.componentDidMount 该方法在组件渲染后被调用(or mounted as React calls it).。 
+ */
+  </script>
+</body>
+ 
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
