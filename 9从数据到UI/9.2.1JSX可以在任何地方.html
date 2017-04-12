@@ -1,5 +1,5 @@
 <!--  此页内容是根据这个网址的 
-http://zcfy.baomitu.com/article/going-from-data-to-ui-in-react-1541.html 「」开头
+http://zcfy.baomitu.com/article/going-from-data-to-ui-in-react-1541.html 「JSX 可以在任何地方」第一个示例 
 部分进行操作的-->
 <!DOCTYPE html>
 <html>
@@ -40,11 +40,14 @@ http://zcfy.baomitu.com/article/going-from-data-to-ui-in-react-1541.html 「」�
           );
         }
     });
-     var destination = document.querySelector("#container");
+ 
+    var destination = document.querySelector("#container");
+ 
+    var theCircle = <Circle bgColor="#F9C240"/>;
  
     ReactDOM.render(
       <div>
-        <Circle bgColor="#F9C240"/>
+        {theCircle}
       </div>,
       destination
     );
