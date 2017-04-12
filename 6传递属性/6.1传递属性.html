@@ -5,6 +5,7 @@ http://zcfy.baomitu.com/article/transferring-properties-1535.html 「」开头
 <html>
  
 <head>
+<meta charset="UTF-8">
   <title>More Components!</title>
   <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
   <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
@@ -21,13 +22,49 @@ http://zcfy.baomitu.com/article/transferring-properties-1535.html 「」开头
 <body>
   <div id="container"></div>
   <script type="text/babel">
- 
-    ReactDOM.render(
+ var Display = React.createClass({
+  render: function() {
+    return(
       <div>
-         
-      </div>,
-      document.querySelector("#container")
+        <p>{this.props.color}</p>
+        <p>{this.props.num}</p>
+        <p>{this.props.size}</p>
+      </div>
     );
+  }
+});
+ 
+var Label = React.createClass({
+  render: function() {
+    return (
+      <Display {...this.props}/>
+    );
+  }
+});
+ 
+var Shirt = React.createClass({
+  render: function() {
+      return (
+        <div>
+          <Label {...this.props}/>
+        </div>
+ /*
+    <Label color={this.props.color}
+                 num={this.props.num}
+                 size={this.props.size}/> 
+     */
+      );
+    }
+   
+});
+ 
+ReactDOM.render(
+  <div>
+    <Shirt color="steelblue" num="3.14" size="medium"/>
+  </div>,
+  document.querySelector("#container")
+);
+
   </script>
 </body>
  
