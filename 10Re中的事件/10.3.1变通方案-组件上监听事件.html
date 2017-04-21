@@ -1,0 +1,103 @@
+<!--  此页内容是根据这个网址的 
+http://zcfy.baomitu.com/article/events-in-react-1543.html 「更多事件技巧」'不能直接在组件上监听事件'
+部分进行操作的-->
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8">
+  <title>React! React! React!</title>
+  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+ 
+  <style>
+    #container {
+      padding: 50px;
+      background-color: #FFF;
+    }
+  </style>
+</head>
+ 
+<body>
+  <div id="container"></div>
+  <script type="text/babel">
+  var destination = document.getElementById('container');
+
+  var Counter = React.createClass({
+    render:function(){
+      var textStyle = {
+        fontSize:72,
+        fontFamily: "sans-serif",
+        color: "#333",
+        fontWeight: "bold"
+      };
+
+      return(
+        <div style={textStyle}>
+          {this.props.display}
+        </div>
+      );
+    }
+  });
+var PlusButton = React.createClass({
+  render: function() {
+      return (
+        <button onClick={this.props.clickHandler}>
+        {/*在 button 元素上，我们指定了 onClick 事件，并将它的值设置为 clickHandler prop。在运行时，这个 prop 被求值为 increase 函数，并且点击加号按钮确保 increase 函数被调用。这就解决了我们的问题，同时还让组件全程参与了。*/}
+          +
+        </button>
+      );
+    }
+});
+  var CounterParent = React.createClass({
+    getInitialState:function(){
+      return{
+        count:0
+      };
+    },
+    increase:function(e){
+      this.setState({
+        count:this.state.count+1
+      });
+    },
+
+    render:function(){
+      var backgroundStyle = {
+        padding: 50,
+        backgroundColor: "#FFC53A",
+        width: 250,
+        height: 100,
+        borderRadius: 10,
+        textAlign: "center"
+      };
+      var buttonStyle = {
+        fontSize: "1em",
+        width: 30,
+        height: 30,
+        fontFamily: "sans-serif",
+        color: "#333",
+        fontWeight: "bold",
+        lineHeight: "3px"
+      };
+
+      return(
+        <div style={backgroundStyle}>
+          <Counter display={this.state.count}/>
+          <PlusButton clickHandler={this.increase}/>
+          {/* 在本例中，我们创建一个属性 clickHandler，该属性的值是 increase 事件处理器。 但是在DOM中的元素上面没有看到事件，这不是以行内的形式添加的。*/}
+        </div>
+      );
+    }
+  });
+
+  ReactDOM.render(
+    <div>
+      <CounterParent/>
+    </div>,
+    destination
+  );
+  </script>
+</body>
+ 
+</html>

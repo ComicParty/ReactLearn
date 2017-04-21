@@ -1,0 +1,58 @@
+<!--  此页内容是根据这个网址的 
+http://zcfy.baomitu.com/article/events-in-react-1543.html 「更多事件技巧」'监听常规DOM'「你必须用传统的 addEventListener， 加上一些额外的手段。」
+部分进行操作的-->
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8">
+  <title>React! React! React!</title>
+  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+ 
+  <style>
+    #container {
+      padding: 50px;
+      background-color: #FFF;
+    }
+  </style>
+</head>
+ 
+<body>
+  <div id="container"></div>
+  <script type="text/babel">
+  var destination = document.getElementById('container');
+
+  var Something = React.createClass({
+    handleMyEvent:function(e){
+
+    },
+    componentDidMount:function(){
+      window.addEventListener("someEvent",this.handleMyEvent);
+    },
+    componentWillUnmount:function(){
+      window.removeEventListener("someEvent",this.handleMyEvent):
+    },
+    return(
+        <div >
+          Hello!
+         <div/>
+    );
+    
+  });
+/*
+唯一要记住的事情是，当组件要被销毁时，要移除事件监听器。
+  为此，你可以用 componentDidMount 相反的方法 componentWillUnmount 方法。
+    在该方法内，放上 removeEventListener 调用，以确保在组件消失后该事件监听的痕迹也消失。
+ */
+  ReactDOM.render(
+    <div>
+      <CounterParent/>
+    </div>,
+    destination
+  );
+  </script>
+</body>
+ 
+</html>

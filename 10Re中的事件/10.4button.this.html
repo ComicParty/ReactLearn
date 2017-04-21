@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>10.4button.this</title>
+</head>
+<body>
+  <button class="button">
+    l
+  </button>
+  <div id="container">
+    
+  </div>
+  <script>
+  var CounterParent = React.createClass({
+  getInitialState: function() {
+    return {
+      count: 0
+    };
+  },
+  increase: function(e) {
+    console.log(this); // CounterParent component
+
+    this.setState({
+      count: this.state.count + 1
+    });
+  },
+  render: function() {
+      return (
+        <div>
+          <Counter display={this.state.count}/>
+          <button onClick={this.increase}>+</button>
+        </div>
+      );
+      //在本例中，increase 事件处理器中 this 的值为 CounterParent 组件，而不是触发该事件的元素。
+      //这是因为 React 自动绑定一个组件中所有的方法给 this。
+      //这种自动绑定的行为只适用于当组件是用 React.createClass 创建时。
+      //如果用 ES6 的类来定义组件，那么事件处理器中 this 的值就是 undefined，除非你自己显式绑定它：
+    }
+});  
+  var descontainer=document.getElementById("container");
+  ReactDOM.render(
+    <div>
+      <CounterParent/>
+    </div>,descontainer
+  );
+
+    function doSomething(e) {
+  console.log(this); //button element
+}
+ 
+var foo = document.querySelector("button");
+foo.addEventListener("click", doSomething, false);
+  </script>
+</body>
+</html>

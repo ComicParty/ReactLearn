@@ -1,0 +1,110 @@
+<!--  此页内容是根据这个网址的 
+http://zcfy.baomitu.com/article/events-in-react-1543.html 「用事件属性干活」
+部分进行操作的-->
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8">
+  <title>React! React! React!</title>
+  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+ 
+  <style>
+    #container {
+      padding: 50px;
+      background-color: #FFF;
+    }
+  </style>
+</head>
+ 
+<body>
+  <div id="container"></div>
+  <script type="text/babel">
+  var destination = document.getElementById('container');
+
+  var Counter = React.createClass({
+    render:function(){
+      var textStyle = {
+        fontSize:72,
+        fontFamily: "sans-serif",
+        color: "#333",
+        fontWeight: "bold"
+      };
+
+      return(
+        <div style={textStyle}>
+          {this.props.display}
+        </div>
+      );
+    }
+  });
+
+  var CounterParent = React.createClass({
+    getInitialState:function(){
+      return{
+        count:0
+      };
+    },
+    increase:function(e){
+      var currentCount = this.state.count;
+      
+      console.log(this);
+      //测试this
+      /*
+      在本例中，increase 事件处理器中 this 的值为 CounterParent 组件，而不是触发该事件的元素。
+      这是因为 React 自动绑定一个组件中所有的方法给 this。这种自动绑定的行为只适用于当组件是用 React.createClass 创建时。
+      如果用 ES6 的类来定义组件，那么事件处理器中 this 的值就是 undefined，除非你自己显式绑定它：
+          <button onClick={this.increase.bind(this)}>+</button>
+      ES6 中自动绑定是不会发生的，所以如果你不用 React.createClass 创建组件，必须记住这点。
+       */
+      
+      if(e.shiftKey){
+        currentCount+=10;
+      }else{
+        currentCount+=1;
+      }
+      this.setState({
+        count:currentCount
+      });
+    },
+
+    render:function(){
+      var backgroundStyle = {
+        padding: 50,
+        backgroundColor: "#FFC53A",
+        width: 250,
+        height: 100,
+        borderRadius: 10,
+        textAlign: "center"
+      };
+      var buttonStyle = {
+        fontSize: "1em",
+        width: 30,
+        height: 30,
+        fontFamily: "sans-serif",
+        color: "#333",
+        fontWeight: "bold",
+        lineHeight: "3px"
+      };
+
+      return(
+        <div style={backgroundStyle}>
+          <Counter display={this.state.count}/>
+          <button onClick={this.increase} style={buttonStyle}>+</button>
+        </div>
+      );
+    }
+  });
+
+  ReactDOM.render(
+    <div>
+      <CounterParent/>
+    </div>,
+    destination
+  );
+  </script>
+</body>
+ 
+</html>
