@@ -32,12 +32,16 @@ var LightningCounter = React.createClass({
         };
       },
       timerTick:function(){
+      console.log(this.state.strikes +" TimerTickRow1"); //从0开始打印，按时间递增
         this.setState({
           strikes:this.state.strikes + 100
         });
+        console.log(this.state.strikes+" TimerTickRow5"); //从100开始打印，按时间打印
       },
       componentDidMount:function(){
+        console.log(this.state.strikes +" row1"); //从0开始打印，只打印1次
         setInterval(this.timerTick,1000);
+        console.log(this.state.strikes +" row3"); //从0开始打印，只打印1次
       },
       render:function(){
         return(

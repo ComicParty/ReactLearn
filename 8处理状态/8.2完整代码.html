@@ -24,6 +24,8 @@ var LightningCounter = React.createClass({
     this.setState({
       strikes: this.state.strikes + 100
     });
+    var counts  = this.state.strikes.toLocaleString();
+    console.log(counts);
   },
   componentDidMount: function() {
     setInterval(this.timerTick, 1000);
