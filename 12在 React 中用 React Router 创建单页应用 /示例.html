@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>
+  <meta charset="UTF-8">
+  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  <script src="https://npmcdn.com/react-router@3.0.2/umd/ReactRouter.min.js"></script>
+  <!-- React Router 不是React本身的一部分，所以要额外添加对它的引用。 -->
+  <style>
+  body {
+  background-color: #FFCC00;
+  padding: 20px;
+  margin: 0;
+}
+h1, h2, p, ul, li {
+  font-family: Helvetica, Arial, sans-serif;
+}
+ul.header li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+}
+ul.header {
+  background-color: #111;
+  padding: 0;
+}
+ul.header li a {
+  color: #FFF;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 20px;
+  display: inline-block;
+}
+.content {
+  background-color: #FFF;
+  padding: 20px;
+}
+.content h2 {
+  padding: 0;
+  margin: 0;
+}
+.content li {
+  margin-bottom: 10px;
+}
+.active{
+  background-color: #0099FF;
+}
+
+  </style>
+</head>
+  
+<body>
+  
+  <div id="container">
+  
+  </div>
+
+  <script  type="text/babel" >
+  var {Router,Route,IndexRoute,IndexLink,Link}=ReactRouter;//{}里面都是Router API对于API，只需要知道他能干啥，而不需要知道里面是如何运作的
+  //每次调用每个API 都要重复带上 ReactRouter 前缀，显然有点冗长。
+  //解决方法是用 ES6 新技巧手动指定哪些值可以自动获得前缀.
+  var Home = React.createClass({
+    render:function(){
+      return(
+        <div>
+          <h2>Hello</h2>
+          <p>Cras facilisis urna ornare ex volutpat, et
+          convallis erat elementum. Ut aliquam, ipsum vitae
+          gravida suscipit, metus dui bibendum est, eget rhoncus nibh
+          metus nec massa. Maecenas hendrerit laoreet augue
+          nec molestie. Cum sociis natoque penatibus et magnis
+          dis parturient montes, nascetur ridiculus mus.</p>
+          <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
+        </div>
+        );
+    }
+  });
+  var Contact = React.createClass({
+    render:function(){
+      return(
+        <div>
+          <h2>GOT QUESTIONS?</h2>
+          <p>The easiest thing to do is post on our<a href="http://forum.kirupa.com">forums</a>.</p>
+        </div>
+      );
+    }
+  });
+  
+  var Stuff =React.createClass({
+    render:function(){
+      return(
+        <div>
+          <h2>STUFF</h2>
+          <p>Mauris sem velit, vehicula eget sodales vitae,
+          rhoncus eget sapien:</p>
+          <ol>
+            <li>Nulla pulvinar diam</li>
+            <li>Facilisis bibendum</li>
+            <li>Vestibulum vulputate</li>
+            <li>Eget erat</li>
+            <li>Id porttitor</li>
+          </ol>
+        </div>
+        );
+    }
+  });
+    var App = React.createClass({
+      render: function() {
+        return (
+          <div>
+            <h1>Siple PSA</h1>
+            <ul className="header">
+              <li><IndexLink activeClassName="active" to="/">Home</IndexLink></li>
+              <li><Link activeClassName="active" to = "/Stuff">Stuff</Link></li>
+              <li><Link activeClassName="active" to="/Contact">Contact</Link></li>
+              {/*在 React Router 中我们指定导航链接的方式，不是直接用久经考验的 a 标记 以及通过 href 属性设置路径，而是用 React Router 的 Link 组件来指定。
+              这个 Link 组件与 a 标记类似，但是提供更多的功能。
+                在实际的页面中，显示的还是a标签。
+              */}  
+             {/*在上面的代码中， Link 组件指定了一个 to 属性。  
+             该属性指定要在地址栏显示的 URL 的值，它实际上是间接告诉 React Router 我们要导航到的位置。
+              Home 链接将用户带到根（/），
+              Stuff 链接将用户带到 stuff 位置，
+              Contact 链接将用户带到 Contact 的位置。*/}
+            </ul>
+            <div className="content">
+              {this.props.children}
+              {/*App 内要显示的内容是被 this.props.childen 的结果所控制，而不是硬编码的组件。*/}
+            </div>
+          </div>
+        )
+      }
+    });
+    var destination = document.querySelector("#container");
+
+    ReactDOM.render(
+      <Router history={ReactRouter.hashHistory}>
+        <Route path="/" component={App}>
+          <IndexRoute component={Home}/>
+          {/*ReactDOM.render 内的 Route 元素包含了一个 IndexRoute 元素，这个元素存在的唯一用途是声明哪个组件在应用开始加载的时候将要被显示出来。*/}
+          <Route path="stuff" component={Stuff}/>
+          <Route path="contact" component={Contact}/>
+        </Route>
+      </Router>,
+      destination
+    );
+
+    /*
+    <ReactRouter.Router history={ReactRouter.hashHistory}>
+    Router 组件是 React Router API 的一部分，它的主要工作是处理应用程序所需的所有路由相关的逻辑。
+    在这个组件内，我们指定路由配置。
+      路由配置用于描述 URL 和视图之间的映射关系。
+        这个配置由另一个组件 Route 来处理：<ReactRouter.Route path="/" component={App}>
+          Route 组件有几个属性，用来定义在某个 URL 上显示什么。
+            path 属性指定要匹配的 URL。在本例中是根 URL，即 /。
+            component 属性用来指定要显示的组件的名称。
+              在本例中，就是我们的 App 组件。
+          把所有这些东西放在一起，这个 Route 就是说，如果 URL 包含根 URL，就显示 App 组件。当预览应用时，因为这个条件为真，所以我们看到的是 App 组件渲染时的结果。
+     */
+    </script>
+</body>
+  
+</html>
