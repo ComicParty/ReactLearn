@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://www.kirupa.com/react/examples/colorizer.htm -->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>React! React! React!</title>
+    <script src="./&#23448;&#26041;&#20363;&#23376;_files/react-15.0.0-rc.2.js"></script>
+    <script src="./&#23448;&#26041;&#20363;&#23376;_files/react-dom-15.0.0-rc.2.js"></script>
+    <script src="./&#23448;&#26041;&#20363;&#23376;_files/browser.min.js"></script>
+    <style>
+    #container {
+        padding: 50px;
+        background-color: #FFF;
+    }
+    
+    .colorSquare {
+        box-shadow: 0px 0px 25px 0px #333;
+        width: 242px;
+        height: 242px;
+        margin-bottom: 15px;
+    }
+    
+    .colorArea input {
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #CCC;
+    }
+    
+    .colorArea button {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+        background-color: #666;
+        color: #FFF;
+        border: 2px solid #666;
+    }
+    
+    .colorArea button:hover {
+        background-color: #111;
+        border-color: #111;
+        cursor: pointer;
+    }
+    </style>
+    <style id="style-1-cropbar-clipper">
+    /* Copyright 2014 Evernote Corporation. All rights reserved. */
+    
+    .en-markup-crop-options {
+        top: 18px !important;
+        left: 50% !important;
+        margin-left: -100px !important;
+        width: 200px !important;
+        border: 2px rgba(255, 255, 255, .38) solid !important;
+        border-radius: 4px !important;
+    }
+    
+    .en-markup-crop-options div div:first-of-type {
+        margin-left: 0px !important;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div data-reactroot="">
+            <div class="colorArea">
+                <div class="colorSquare" style="background-color: red;"></div>
+                <form lpformnum="1" _lpchecked="1">
+                    <input placeholder="Enter a color value">
+                    <button type="submit">go</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/babel">
+        var destination = document.querySelector("#container");
+       
+        var Colorizer = React.createClass({ 
+          getInitialState: function() { 
+            return { 
+              color: '', 
+              bgColor: '' 
+            } 
+          }, 
+          colorValue: function(e) { 
+            this.setState({
+              color: e.target.value
+            }); 
+          }, 
+          setNewColor: function(e){ 
+            this.setState({
+              bgColor: this.state.color
+            }); 
+            e.preventDefault(); 
+          }, 
+          render: function() { 
+            var squareStyle = { 
+              backgroundColor: this.state.bgColor 
+            }; 
+
+            return (
+              <div className="colorArea">
+                  <div style={squareStyle} className="colorSquare">
+                  </div>
+                  <form onSubmit={this.setNewColor}>
+                    <input onChange={this.colorValue} placeholder="Enter a color value">
+                  {/*onchange 事件会在域的内容改变时发生。*/}
+                    </input>
+                    <button type="submit">go</button>
+                  </form>
+              </div>
+            ); 
+          } 
+        }); 
+        ReactDOM.render(
+        <div>
+            <Colorizer/>
+        </div>, destination );
+    </script>
+</body>
+
+</html>
